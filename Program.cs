@@ -10,17 +10,20 @@ var connectionString = builder.Configuration.GetConnectionString("conexao");
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<IdentityContext>(
-        options => options.UseSqlServer(connectionString));
+// Registrar o IdentityContext para autenticação e autorização
+builder.Services.AddDbContext<IdentityContext>(options =>
+    options.UseSqlServer(connectionString));
 
-builder.Services.AddIdentity<Admin, IdentityRole>(
-    options =>
-    {
-        options.Password.RequiredUniqueChars = 0;
-        options.Password.RequiredLength = 10;
-    }
-    )
-    .AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();
+builder.Services.AddDbContext<Contexto>(options =>
+    options.UseSqlServer(connectionString));
+
+builder.Services.AddIdentity<Admin, IdentityRole>(options =>
+{
+    options.Password.RequiredUniqueChars = 0;
+    options.Password.RequiredLength = 10;
+})
+    .AddEntityFrameworkStores<IdentityContext>()
+    .AddDefaultTokenProviders();
 
 var app = builder.Build();
 
@@ -28,7 +31,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -44,6 +46,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();
