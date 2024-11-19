@@ -11,7 +11,7 @@ using RotasParaOFuturo.Models;
 namespace RotasParaOFuturo.Migrations.ContextoMigrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20241119152020_InitialCreate")]
+    [Migration("20241119163732_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
