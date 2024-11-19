@@ -63,8 +63,13 @@ namespace RotasParaOFuturo.Controllers
 
                 if(result.Succeeded)
                 {
-                    await signInManager.SignInAsync(admin, false);
-                    return RedirectToAction("Inicial", "Home"); 
+                    var roleResult = await userManager.AddToRoleAsync(admin, "Admin");
+
+                    if(roleResult.Succeeded)
+                    {
+                        await signInManager.SignInAsync(admin, false);
+                        return RedirectToAction("Inicial", "Home");
+                    }  
                 }
                 foreach(var error in result.Errors)
                 {
