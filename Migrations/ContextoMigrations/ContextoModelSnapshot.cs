@@ -3,20 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RotasParaOFuturo.Models;
 
 #nullable disable
 
-namespace RotasParaOFuturo.Migrations
+namespace RotasParaOFuturo.Migrations.ContextoMigrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20241119183429_Initial")]
-    partial class Initial
+    partial class ContextoModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

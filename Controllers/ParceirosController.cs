@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RotasParaOFuturo.Models;
 
-namespace CurricularizacaoADS2024.Controllers
+namespace RotasParaOFuturo.Controllers
 {
     public class ParceirosController : Controller
     {
