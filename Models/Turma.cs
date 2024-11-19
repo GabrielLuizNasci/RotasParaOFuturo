@@ -23,7 +23,7 @@ namespace RotasParaOFuturo.Models
 
         [Display(Name = "Atividade: ")]
         [StringLength(35)]
-        public Atividade atidade {get; set; }
+        public Atividade atividade {get; set; }
         [Display(Name = "Atividade: ")]
         public int atividadeID { get; set; }
 

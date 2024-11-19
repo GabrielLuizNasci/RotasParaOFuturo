@@ -29,7 +29,6 @@ namespace RotasParaOFuturo.Models
         public string Email { get; set; }
 
 
-
         [Display(Name = "Parceiro: ")]
         public Parceiro parceiro { get; set; }
 

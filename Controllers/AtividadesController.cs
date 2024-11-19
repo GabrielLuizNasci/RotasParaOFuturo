@@ -21,7 +21,7 @@ namespace RotasParaOFuturo.Controllers
         // GET: Atividades
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Atividade.ToListAsync());
+            return View(await _context.Atividades.ToListAsync());
         }
 
         // GET: Atividades/Details/5
@@ -32,7 +32,7 @@ namespace RotasParaOFuturo.Controllers
                 return NotFound();
             }
 
-            var atividade = await _context.Atividade
+            var atividade = await _context.Atividades
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (atividade == null)
             {
@@ -72,7 +72,7 @@ namespace RotasParaOFuturo.Controllers
                 return NotFound();
             }
 
-            var atividade = await _context.Atividade.FindAsync(id);
+            var atividade = await _context.Atividades.FindAsync(id);
             if (atividade == null)
             {
                 return NotFound();
@@ -123,7 +123,7 @@ namespace RotasParaOFuturo.Controllers
                 return NotFound();
             }
 
-            var atividade = await _context.Atividade
+            var atividade = await _context.Atividades
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (atividade == null)
             {
@@ -138,10 +138,10 @@ namespace RotasParaOFuturo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var atividade = await _context.Atividade.FindAsync(id);
+            var atividade = await _context.Atividades.FindAsync(id);
             if (atividade != null)
             {
-                _context.Atividade.Remove(atividade);
+                _context.Atividades.Remove(atividade);
             }
 
             await _context.SaveChangesAsync();
@@ -150,7 +150,7 @@ namespace RotasParaOFuturo.Controllers
 
         private bool AtividadeExists(int id)
         {
-            return _context.Atividade.Any(e => e.Id == id);
+            return _context.Atividades.Any(e => e.Id == id);
         }
     }
 }

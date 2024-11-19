@@ -21,7 +21,7 @@ namespace CurricularizacaoADS2024.Controllers
         // GET: Turmas
         public async Task<IActionResult> Index()
         {
-            var contexto = _context.Turma.Include(t => t.atidade);
+            var contexto = _context.Turmas.Include(t => t.atividade);
             return View(await contexto.ToListAsync());
         }
 
@@ -33,8 +33,8 @@ namespace CurricularizacaoADS2024.Controllers
                 return NotFound();
             }
 
-            var turma = await _context.Turma
-                .Include(t => t.atidade)
+            var turma = await _context.Turmas
+                .Include(t => t.atividade)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (turma == null)
             {
@@ -76,7 +76,7 @@ namespace CurricularizacaoADS2024.Controllers
                 return NotFound();
             }
 
-            var turma = await _context.Turma.FindAsync(id);
+            var turma = await _context.Turmas.FindAsync(id);
             if (turma == null)
             {
                 return NotFound();
@@ -129,8 +129,8 @@ namespace CurricularizacaoADS2024.Controllers
                 return NotFound();
             }
 
-            var turma = await _context.Turma
-                .Include(t => t.atidade)
+            var turma = await _context.Turmas
+                .Include(t => t.atividade)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (turma == null)
             {
@@ -145,10 +145,10 @@ namespace CurricularizacaoADS2024.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var turma = await _context.Turma.FindAsync(id);
+            var turma = await _context.Turmas.FindAsync(id);
             if (turma != null)
             {
-                _context.Turma.Remove(turma);
+                _context.Turmas.Remove(turma);
             }
 
             await _context.SaveChangesAsync();
@@ -157,7 +157,7 @@ namespace CurricularizacaoADS2024.Controllers
 
         private bool TurmaExists(int id)
         {
-            return _context.Turma.Any(e => e.Id == id);
+            return _context.Turmas.Any(e => e.Id == id);
         }
     }
 }

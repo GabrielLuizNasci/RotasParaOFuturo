@@ -60,7 +60,6 @@
     <thead class="table-light">
         <tr>
             <th>@Html.DisplayNameFor(model => model.DataMatricula)</th>
-            <th>@Html.DisplayNameFor(model => model.curso)</th>
             <th>@Html.DisplayNameFor(model => model.aluno)</th>
             <th>@Html.DisplayNameFor(model => model.RA)</th>
             <th>@Html.DisplayNameFor(model => model.turma)</th>
@@ -72,7 +71,6 @@
         {
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.DataMatricula)</td>
-                <td>@Html.DisplayFor(modelItem => item.curso.Descricao)</td>
                 <td>@Html.DisplayFor(modelItem => item.aluno.Nome)</td>
                 <td>@Html.DisplayFor(modelItem => item.RA)</td>
                 <td>@Html.DisplayFor(modelItem => item.turma.descricao)</td>

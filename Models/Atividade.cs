@@ -15,5 +15,10 @@ namespace RotasParaOFuturo.Models
         [StringLength(50)]
         [Display(Name = "Nome: ")]
         public string Nome { get; set; }
+
+        [Required]
+        [StringLength(40)]
+        [Display(Name = "Descricao: ")]
+        public string Descricao { get; set; }
     }
 }

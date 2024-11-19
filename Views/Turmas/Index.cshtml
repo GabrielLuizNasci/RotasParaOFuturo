@@ -50,7 +50,7 @@
         <tr>
             <th>@Html.DisplayNameFor(model => model.descricao)</th>
             <th>@Html.DisplayNameFor(model => model.periodo)</th>
-            <th>@Html.DisplayNameFor(model => model.atidade)</th>
+            <th>@Html.DisplayNameFor(model => model.atividade)</th>
             <th class="text-center">Ações</th>
         </tr>
     </thead>
@@ -60,7 +60,7 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.descricao)</td>
                 <td>@Html.DisplayFor(modelItem => item.periodo)</td>
-                <td>@Html.DisplayFor(modelItem => item.atidade.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => item.atividade.Nome)</td>
                 <td class="text-center">
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">
                         <i class="bi bi-pencil-square"></i> Editar

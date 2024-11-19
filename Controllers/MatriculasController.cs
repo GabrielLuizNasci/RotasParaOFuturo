@@ -21,7 +21,7 @@ namespace CurricularizacaoADS2024.Controllers
         // GET: Matriculas
         public async Task<IActionResult> Index()
         {
-            var contexto = _context.Matriculas.Include(m => m.aluno).Include(m => m.curso).Include(m => m.turma);
+            var contexto = _context.Matriculas.Include(m => m.aluno).Include(m => m.turma);
             return View(await contexto.ToListAsync());
         }
 
@@ -35,7 +35,6 @@ namespace CurricularizacaoADS2024.Controllers
 
             var matricula = await _context.Matriculas
                 .Include(m => m.aluno)
-                .Include(m => m.curso)
                 .Include(m => m.turma)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (matricula == null)
@@ -50,8 +49,7 @@ namespace CurricularizacaoADS2024.Controllers
         public IActionResult Create()
         {
             ViewData["alunoID"] = new SelectList(_context.Alunos, "Id", "Nome");
-            ViewData["cursoID"] = new SelectList(_context.Cursos, "Id", "Nome");
-            ViewData["turmaID"] = new SelectList(_context.Turma, "Id", "descricao");
+            ViewData["turmaID"] = new SelectList(_context.Turmas, "Id", "descricao");
             return View();
         }
 
@@ -69,8 +67,7 @@ namespace CurricularizacaoADS2024.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["alunoID"] = new SelectList(_context.Alunos, "Id", "Nome", matricula.alunoID);
-            ViewData["cursoID"] = new SelectList(_context.Cursos, "Id", "Nome", matricula.cursoID);
-            ViewData["turmaID"] = new SelectList(_context.Turma, "Id", "descricao", matricula.turmaID);
+            ViewData["turmaID"] = new SelectList(_context.Turmas, "Id", "descricao", matricula.turmaID);
             return View(matricula);
         }
 
@@ -88,8 +85,7 @@ namespace CurricularizacaoADS2024.Controllers
                 return NotFound();
             }
             ViewData["alunoID"] = new SelectList(_context.Alunos, "Id", "Nome", matricula.alunoID);
-            ViewData["cursoID"] = new SelectList(_context.Cursos, "Id", "Nome", matricula.cursoID);
-            ViewData["turmaID"] = new SelectList(_context.Turma, "Id", "descricao", matricula.turmaID);
+            ViewData["turmaID"] = new SelectList(_context.Turmas, "Id", "descricao", matricula.turmaID);
             return View(matricula);
         }
 
@@ -126,8 +122,7 @@ namespace CurricularizacaoADS2024.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["alunoID"] = new SelectList(_context.Alunos, "Id", "Nome", matricula.alunoID);
-            ViewData["cursoID"] = new SelectList(_context.Cursos, "Id", "Nome", matricula.cursoID);
-            ViewData["turmaID"] = new SelectList(_context.Turma, "Id", "descricao", matricula.turmaID);
+            ViewData["turmaID"] = new SelectList(_context.Turmas, "Id", "descricao", matricula.turmaID);
             return View(matricula);
         }
 
@@ -141,7 +136,6 @@ namespace CurricularizacaoADS2024.Controllers
 
             var matricula = await _context.Matriculas
                 .Include(m => m.aluno)
-                .Include(m => m.curso)
                 .Include(m => m.turma)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (matricula == null)

@@ -1,9 +1,109 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Authorization
+@{
     ViewData["Title"] = "Página Inicial";
 }
-<h1>@ViewData["Title"]</h1>
 
 <div class="text-center">
     <h1 class="display-4">Bem-Vindo</h1>
-    <p>Casa das Crianças 2024</p>
+    <h3>Casa das Crianças 2024 - Projeto Rotas para o Futuro</h3>
 </div>
+
+<div class="card-container">
+    <div class="card-item">
+        <AuthorizeView Roles="Admin">
+            <div class="card text-center">
+                <div class="card-header">Alunos</div>
+                <div class="card-body">
+                    <h5 class="card-title">Manutenção de dados de Alunos</h5>
+                    <a class="btn btn-primary" data-mdb-ripple-init asp-area="" asp-controller="Alunos" asp-action="Index">
+                        Acessar
+                    </a>
+                </div>
+            </div>
+        </AuthorizeView>
+    </div>
+    <div class="card-item text-center">
+        <AuthorizeView Roles="Admin">
+            <div class="card text-center">
+                <div class="card-header">Responsáveis</div>
+                <div class="card-body">
+                    <h5 class="card-title">Manutenção de dados de Responsáveis</h5>
+                    <a class="btn btn-primary" data-mdb-ripple-init asp-area="" asp-controller="Responsavel" asp-action="Index">
+                        Acessar
+                    </a>
+                </div>
+            </div>
+        </AuthorizeView>
+    </div>
+    <div class="card-item text-center">
+        <AuthorizeView Roles="Admin">
+            <div class="card text-center">
+                <div class="card-header">Visitas</div>
+                <div class="card-body">
+                    <h5 class="card-title">Manutenção de dados de Visitas</h5>
+                    <a class="btn btn-primary" data-mdb-ripple-init asp-area="" asp-controller="Visitas" asp-action="Index">
+                        Acessar
+                    </a>
+                </div>
+            </div>
+        </AuthorizeView>
+    </div>
+</div>
+
+<div class="card-container">
+    <div class="card-item">
+        <AuthorizeView Roles="Admin">
+            <div class="card text-center">
+                <div class="card-header">Turmas</div>
+                <div class="card-body">
+                    <h5 class="card-title">Manutenção de dados de Turmas</h5>
+                    <a class="btn btn-primary" data-mdb-ripple-init asp-area="" asp-controller="Turmas" asp-action="Index">
+                        Acessar
+                    </a>
+                </div>
+            </div>
+        </AuthorizeView>
+    </div>
+    <div class="card-item">
+        <AuthorizeView Roles="Admin,Professor">
+            <div class="card text-center">
+                <div class="card-header">Atividades</div>
+                <div class="card-body">
+                    <h5 class="card-title">Manutenção de dados de Atividades</h5>
+                    <a class="btn btn-primary" data-mdb-ripple-init asp-area="" asp-controller="Atividades" asp-action="Index">
+                        Acessar
+                    </a>
+                </div>
+            </div>
+        </AuthorizeView>
+    </div>
+    <div class="card-item">
+        <AuthorizeView Roles="Admin">
+            <div class="card text-center">
+                <div class="card-header">Parceiros</div>
+                <div class="card-body">
+                    <h5 class="card-title">Manutenção de dados de Parceiros</h5>
+                    <a class="btn btn-primary" data-mdb-ripple-init asp-area="" asp-controller="Parceiros" asp-action="Index">
+                        Acessar
+                    </a>
+                </div>
+            </div>
+        </AuthorizeView>
+    </div>
+</div>
+
+<style>
+    .card-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .card-item {
+        width: 300px;
+        max-width: 100%;
+    }
+</style>

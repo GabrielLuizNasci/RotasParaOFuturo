@@ -51,6 +51,21 @@ namespace RotasParaOFuturo.Controllers
         {
             if(ModelState.IsValid)
             {
+                var roleManager = HttpContext.RequestServices.GetRequiredService<RoleManager<IdentityRole>>();
+
+                if(!await roleManager.RoleExistsAsync("Admin"))
+                {
+                    var roleCreationResult = await roleManager.CreateAsync(new IdentityRole("Admin"));
+                    if(!roleCreationResult.Succeeded)
+                    {
+                        foreach(var error in roleCreationResult.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
+                        return View(model);
+                    }
+                }
+
                 Admin admin = new()
                 {
                     Nome = model.Nome,
