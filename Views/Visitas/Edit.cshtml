@@ -1,0 +1,88 @@
+﻿@model RotasParaOFuturo.Models.Visita
+
+@{
+    ViewData["Title"] = "Editar Visita";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mb-4 text-center"><i class="fas fa-calendar-check"></i> Editar Visita</h1>
+
+<div class="d-flex justify-content-center">
+    <div class="card shadow mb-4" style="width: 100%; max-width: 600px;">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0"><i class="fas fa-info-circle"></i> Informações da Visita</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" class="needs-validation" novalidate>
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group">
+                    <label asp-for="responsavelID" class="control-label"><i class="fas fa-user-tie"></i> Responsável</label>
+                    <select asp-for="responsavelID" class="form-control" asp-items="ViewBag.responsavelID" required></select>
+                    <span asp-validation-for="responsavelID" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="datavisita" class="control-label"><i class="fas fa-calendar-day"></i> Data da Visita</label>
+                    <input asp-for="datavisita" class="form-control" placeholder="Selecione a data" required />
+                    <span asp-validation-for="datavisita" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="descricao" class="control-label"><i class="fas fa-clipboard-list"></i> Descrição</label>
+                    <input asp-for="descricao" class="form-control" placeholder="Digite a descrição" required />
+                    <span asp-validation-for="descricao" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="status" class="control-label"><i class="fas fa-check-circle"></i> Status</label>
+                    <select asp-for="status" class="form-control" required>
+                        <option value="1">Aprovado</option>
+                        <option value="2">Pendente</option>
+                        <option value="3">Desaprovado</option>
+                    </select>
+                    <span asp-validation-for="status" class="text-danger"></span>
+                </div>
+
+                <div class="form-group d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Salvar</button>
+                    <a asp-action="Index" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    .card {
+        border-radius: 10px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        border-radius: 5px;
+    }
+
+    .btn {
+        border-radius: 5px;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+    }
+
+    .text-danger {
+        font-size: 0.9rem;
+    }
+</style>

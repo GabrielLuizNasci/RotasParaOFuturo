@@ -1,0 +1,41 @@
+﻿@model RotasParaOFuturo.Models.Visita
+
+@{
+    ViewData["Title"] = "Detalhes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Detalhes da Visita</h1>
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Informações da Visita</h4>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3 border-bottom pb-3">
+                <div class="col-sm-4 font-weight-bold">Responsável:</div>
+                <div class="col-sm-8">@Html.DisplayFor(model => model.responsavel.nome)</div>
+            </div>
+            <div class="row mb-3 border-bottom pb-3">
+                <div class="col-sm-4 font-weight-bold">Data da Visita:</div>
+                <div class="col-sm-8">@Html.DisplayFor(model => model.datavisita)</div>
+            </div>
+            <div class="row mb-3 border-bottom pb-3">
+                <div class="col-sm-4 font-weight-bold">Descrição:</div>
+                <div class="col-sm-8">@Html.DisplayFor(model => model.descricao)</div>
+            </div>
+            <div class="row mb-3 border-bottom pb-3">
+                <div class="col-sm-4 font-weight-bold">Status:</div>
+                <div class="col-sm-8">@Html.DisplayFor(model => model.StatusFormatado)</div>
+            </div>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-success mr-2">
+                <i class="fas fa-edit"></i> Editar
+            </a>
+            <a asp-action="Index" class="btn btn-danger">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+﻿@model RotasParaOFuturo.Models.Matricula
+
+@{
+    ViewData["Title"] = "Adicionar Matrícula";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center my-4">Adicionar Matrícula</h1>
+
+<div class="card mx-auto shadow-sm" style="max-width: 700px;">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0"><i class="fas fa-user-graduate"></i> Cadastro de Matrícula</h4>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+            <div class="mb-3">
+                <label asp-for="DataMatricula" class="form-label">
+                    <i class="fas fa-calendar-alt"></i> Data de Matrícula
+                </label>
+                <input asp-for="DataMatricula" class="form-control" type="date" />
+                <span asp-validation-for="DataMatricula" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="cursoID" class="form-label">
+                    <i class="fas fa-book"></i> Curso
+                </label>
+                <select asp-for="cursoID" class="form-select" asp-items="ViewBag.cursoID">
+                    <option value="">Selecione um curso</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="alunoID" class="form-label">
+                    <i class="fas fa-user"></i> Aluno
+                </label>
+                <select asp-for="alunoID" class="form-select" asp-items="ViewBag.alunoID">
+                    <option value="">Selecione um aluno</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="RA" class="form-label">
+                    <i class="fas fa-id-badge"></i> Registro Acadêmico (RA)
+                </label>
+                <input asp-for="RA" class="form-control" placeholder="Digite o RA do aluno" />
+                <span asp-validation-for="RA" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="turmaID" class="form-label">
+                    <i class="fas fa-chalkboard"></i> Turma
+                </label>
+                <select asp-for="turmaID" class="form-select" asp-items="ViewBag.turmaID">
+                    <option value="">Selecione uma turma</option>
+                </select>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-save"></i> Salvar
+                </button>
+                <a asp-action="Index" class="btn btn-danger">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

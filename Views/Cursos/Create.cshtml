@@ -1,0 +1,50 @@
+﻿@model RotasParaOFuturo.Models.Curso
+
+@{
+    ViewData["Title"] = "Adicionar Curso";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center my-4">Adicionar Curso</h1>
+
+<div class="card mx-auto shadow-sm" style="max-width: 600px;">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0"><i class="fas fa-graduation-cap"></i> Cadastro de Curso</h4>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+            <div class="mb-3">
+                <label asp-for="Nome" class="form-label">
+                    <i class="fas fa-pencil-alt"></i> Nome do Curso
+                </label>
+                <input asp-for="Nome" class="form-control" placeholder="Digite o nome do curso" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Descricao" class="form-label">
+                    <i class="fas fa-info-circle"></i> Descrição do Curso
+                </label>
+                <input asp-for="Descricao" class="form-control" placeholder="Digite a descrição do curso" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-save"></i> Salvar
+                </button>
+                <a asp-action="Index" class="btn btn-danger">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

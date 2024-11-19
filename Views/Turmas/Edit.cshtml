@@ -1,0 +1,78 @@
+﻿@model RotasParaOFuturo.Models.Turma
+
+@{
+    ViewData["Title"] = "Editar Turma";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mb-4 text-center"><i class="fas fa-chalkboard"></i> Editar Turma</h1>
+
+<div class="d-flex justify-content-center">
+    <div class="card shadow mb-4" style="width: 100%; max-width: 600px;">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0"><i class="fas fa-info-circle"></i> Informações da Turma</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" class="needs-validation" novalidate>
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group">
+                    <label asp-for="descricao" class="control-label"><i class="fas fa-book"></i> Descrição</label>
+                    <input asp-for="descricao" class="form-control" placeholder="Digite a descrição da turma" required />
+                    <span asp-validation-for="descricao" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="periodo" class="control-label"><i class="fas fa-clock"></i> Período</label>
+                    <input asp-for="periodo" class="form-control" placeholder="Digite o período da turma" required />
+                    <span asp-validation-for="periodo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="atividadeID" class="control-label"><i class="fas fa-clipboard-list"></i> Atividade</label>
+                    <select asp-for="atividadeID" class="form-control" asp-items="ViewBag.atividadeID" required></select>
+                    <span asp-validation-for="atividadeID" class="text-danger"></span>
+                </div>
+
+                <div class="form-group d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Salvar</button>
+                    <a asp-action="Index" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    .card {
+        border-radius: 10px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        border-radius: 5px;
+    }
+
+    .btn {
+        border-radius: 5px;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+    }
+
+    .text-danger {
+        font-size: 0.9rem;
+    }
+</style>
