@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="~/assets/Fachada.png"
+                     class="img-fluid" alt="Fachada da Casa da Criança">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <h2 class="text-center text-info">Cadastre-se</h2>
+                <div class="mb-1">
+                    <a class="btn btn-primary btn-lg" asp-area="" asp-controller="Admin" asp-action="Login">
+                        Assistente Social
+                    </a>   
+                </div>
+                <div class="mb-1">
+                    <a class="btn btn-primary btn-lg" asp-area="" asp-controller="#" asp-action="#">
+                        Professor
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
