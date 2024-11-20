@@ -1,81 +1,61 @@
 ﻿@model RotasParaOFuturo.Models.Aluno
 
-
 @{
     ViewData["Title"] = "Adicionar Aluno";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1 class="text-center my-4">Adicionar Aluno</h1>
 
-<div class="card mx-auto shadow-sm" style="max-width: 600px;">
+<div class="card mx-auto shadow-sm" style="max-width: 800px;">
     <div class="card-header bg-primary text-white">
-        <h4 class="mb-0">Dados do Aluno</h4>
+        <h4 class="mb-0"><i class="fas fa-user-graduate"></i> Cadastro de Aluno</h4>
     </div>
     <div class="card-body">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
+            <!-- Nome -->
             <div class="mb-3">
                 <label asp-for="Nome" class="form-label">
-                    <i class="fas fa-user"></i> Nome
+                    <i class="fas fa-user"></i> Nome Completo
                 </label>
-                <input asp-for="Nome" class="form-control" />
+                <input asp-for="Nome" class="form-control" placeholder="Digite o nome do aluno" required />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
 
-            <div class="mb-3">
-                <label asp-for="Nascimento" class="form-label">
-                    <i class="fas fa-calendar-alt"></i> Data de Nascimento
-                </label>
-                <input asp-for="Nascimento" class="form-control" type="date" />
-                <span asp-validation-for="Nascimento" class="text-danger"></span>
-            </div>
-
+            <!-- Endereço -->
             <div class="mb-3">
                 <label asp-for="Endereco" class="form-label">
                     <i class="fas fa-map-marker-alt"></i> Endereço
                 </label>
-                <input asp-for="Endereco" class="form-control" />
+                <input asp-for="Endereco" class="form-control" placeholder="Digite o endereço do aluno" required />
                 <span asp-validation-for="Endereco" class="text-danger"></span>
             </div>
 
-            <div class="mb-3">
-                <label asp-for="CPF" class="form-label">
-                    <i class="fas fa-id-card"></i> CPF
-                </label>
-                <input asp-for="CPF" class="form-control" type="text" />
-                <span asp-validation-for="CPF" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="RG" class="form-label">
-                    <i class="fas fa-id-card-alt"></i> RG
-                </label>
-                <input asp-for="RG" class="form-control" />
-                <span asp-validation-for="RG" class="text-danger"></span>
-            </div>
-
+            <!-- Telefone -->
             <div class="mb-3">
                 <label asp-for="Telefone" class="form-label">
-                    <i class="fas fa-phone"></i> Telefone
+                    <i class="fas fa-phone-alt"></i> Telefone
                 </label>
-                <input asp-for="Telefone" class="form-control" type="text" />
+                <input asp-for="Telefone" class="form-control" placeholder="(XX) XXXXX-XXXX" type="text" required />
                 <span asp-validation-for="Telefone" class="text-danger"></span>
             </div>
 
+            <!-- Sexo -->
             <div class="mb-3">
                 <label asp-for="Sexo" class="form-label">
                     <i class="fas fa-venus-mars"></i> Sexo
                 </label>
-                @Html.DropDownList("Sexo", new SelectList(new List<SelectListItem>
-                {
-                new SelectListItem { Value = "1", Text = "Masculino" },
-                new SelectListItem { Value = "2", Text = "Feminino" },
-                new SelectListItem { Value = "3", Text = "Outro" }
-                }, "Value", "Text"), "Selecione o Sexo", new { @class = "form-select" })
+                @Html.DropDownListFor(
+                         model => model.Sexo,
+                         new SelectList(new[] { "Masculino", "Feminino", "Outro" }, Model.Sexo),
+                         "Selecione o Sexo",
+                         new { @class = "form-control", required = "required" })
                 <span asp-validation-for="Sexo" class="text-danger"></span>
             </div>
 
+            <!-- Botões -->
             <div class="d-flex justify-content-between">
                 <button type="submit" class="btn btn-success">
                     <i class="fas fa-save"></i> Salvar

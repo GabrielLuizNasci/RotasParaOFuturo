@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RotasParaOFuturo.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RotasParaOFuturo.Controllers
 {
@@ -19,9 +16,32 @@ namespace RotasParaOFuturo.Controllers
         }
 
         // GET: Alunos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string nome, string cpf, int? id)
         {
-            return View(await _context.Alunos.ToListAsync());
+            // Inicia a consulta com todos os alunos
+            var alunos = from a in _context.Alunos
+                         select a;
+
+            // Aplica filtro se o nome foi passado
+            if (!string.IsNullOrEmpty(nome))
+            {
+                alunos = alunos.Where(a => a.Nome.Contains(nome));  // Filtra por nome
+            }
+
+            // Aplica filtro se o CPF foi passado
+            if (!string.IsNullOrEmpty(cpf))
+            {
+                alunos = alunos.Where(a => a.CPF.ToString().Contains(cpf)); // Filtra por CPF
+            }
+
+            // Aplica filtro se o ID foi passado
+            if (id.HasValue)
+            {
+                alunos = alunos.Where(a => a.Id == id);  // Filtra por ID
+            }
+
+            // Retorna a lista de alunos filtrados
+            return View(await alunos.ToListAsync());
         }
 
         // GET: Alunos/Details/5
@@ -45,22 +65,28 @@ namespace RotasParaOFuturo.Controllers
         // GET: Alunos/Create
         public IActionResult Create()
         {
-            return View();
+            // Garantindo que um novo aluno será criado com sexo predefinido
+            var aluno = new Aluno
+            {
+                Sexo = "Masculino"  // Definindo valor padrão para o sexo
+            };
+
+            return View(aluno);
         }
 
         // POST: Alunos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nome,Nascimento,Endereco,CPF,RG,Telefone,Sexo")] Aluno aluno)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(aluno);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                _context.Add(aluno);  // Adiciona o aluno ao contexto
+                await _context.SaveChangesAsync();  // Salva no banco de dados
+                return RedirectToAction(nameof(Index));  // Redireciona para a lista de alunos
             }
+
+            // Se o modelo não for válido, retorna a view com o modelo atual para corrigir os erros
             return View(aluno);
         }
 
@@ -77,12 +103,11 @@ namespace RotasParaOFuturo.Controllers
             {
                 return NotFound();
             }
+
             return View(aluno);
         }
 
         // POST: Alunos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Nascimento,Endereco,CPF,RG,Telefone,Sexo")] Aluno aluno)
@@ -96,12 +121,12 @@ namespace RotasParaOFuturo.Controllers
             {
                 try
                 {
-                    _context.Update(aluno);
-                    await _context.SaveChangesAsync();
+                    _context.Update(aluno);  // Atualiza o aluno no contexto
+                    await _context.SaveChangesAsync();  // Salva as alterações no banco de dados
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AlunoExists(aluno.Id))
+                    if (!AlunoExists(aluno.Id))  // Verifica se o aluno existe
                     {
                         return NotFound();
                     }
@@ -110,9 +135,10 @@ namespace RotasParaOFuturo.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));  // Redireciona para a lista de alunos
             }
-            return View(aluno);
+
+            return View(aluno);  // Se não for válido, retorna à view de edição com os erros
         }
 
         // GET: Alunos/Delete/5
@@ -130,7 +156,7 @@ namespace RotasParaOFuturo.Controllers
                 return NotFound();
             }
 
-            return View(aluno);
+            return View(aluno);  // Exibe a view de confirmação para deletar
         }
 
         // POST: Alunos/Delete/5
@@ -141,16 +167,16 @@ namespace RotasParaOFuturo.Controllers
             var aluno = await _context.Alunos.FindAsync(id);
             if (aluno != null)
             {
-                _context.Alunos.Remove(aluno);
+                _context.Alunos.Remove(aluno);  // Remove o aluno do contexto
             }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            await _context.SaveChangesAsync();  // Salva as alterações no banco de dados
+            return RedirectToAction(nameof(Index));  // Redireciona para a lista de alunos
         }
 
         private bool AlunoExists(int id)
         {
-            return _context.Alunos.Any(e => e.Id == id);
+            return _context.Alunos.Any(e => e.Id == id);  // Verifica se o aluno existe no banco
         }
     }
 }

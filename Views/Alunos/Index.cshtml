@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<RotasParaOFuturo.Models.Aluno>
+
 @{
-    ViewData["Title"] = "Alunos";
+    ViewData["Title"] = "Pesquisar Alunos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
@@ -32,49 +33,60 @@
         }
 </style>
 
-<h1 class="mb-4">Gerenciamento de Alunos</h1>
+<h1 class="mb-4">Controle de Alunos</h1>
 
-<!-- Botão para Adicionar Aluno -->
+<!-- Formulário de pesquisa -->
+<form method="get" class="mb-4">
+    <div class="d-flex justify-content-start">
+        <div class="me-2">
+            <input type="text" name="nome" class="form-control" placeholder="Pesquisar por Nome" value="@Context.Request.Query["nome"]" />
+        </div>
+        <div class="me-2">
+            <input type="text" name="cpf" class="form-control" placeholder="Pesquisar por CPF" value="@Context.Request.Query["cpf"]" />
+        </div>
+        <div class="me-2">
+            <input type="number" name="id" class="form-control" placeholder="Pesquisar por ID" value="@Context.Request.Query["id"]" />
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </div>
+</form>
+
+<!-- Botão de Nova Criação -->
 <div class="d-flex justify-content-start mb-4">
-    <a asp-action="Create" class="btn btn-success text-white">
-        <i class="bi bi-person-plus me-2"></i> Adicionar Aluno
+    <a href="@Url.Action("Create", "Alunos")" class="btn btn-success text-white">
+        <i class="bi bi-plus-circle me-2"></i> Criar Novo Aluno
     </a>
 </div>
 
-<!-- Tabela de Alunos -->
+<!-- Tabela Alunos -->
 <table class="table custom-table table-striped table-hover table-bordered">
     <thead class="table-light">
         <tr>
             <th>@Html.DisplayNameFor(model => model.Nome)</th>
-            <th>@Html.DisplayNameFor(model => model.Nascimento)</th>
-            <th>@Html.DisplayNameFor(model => model.Endereco)</th>
             <th>@Html.DisplayNameFor(model => model.CPF)</th>
-            <th>@Html.DisplayNameFor(model => model.RG)</th>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
             <th>@Html.DisplayNameFor(model => model.Telefone)</th>
-            <th>@Html.DisplayNameFor(model => model.Sexo)</th>
             <th class="text-center">Ações</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var aluno in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-                <td>@Html.DisplayFor(modelItem => item.Nascimento)</td>
-                <td>@Html.DisplayFor(modelItem => item.Endereco)</td>
-                <td>@Html.DisplayFor(modelItem => item.CPF)</td>
-                <td>@Html.DisplayFor(modelItem => item.RG)</td>
-                <td>@Html.DisplayFor(modelItem => item.Telefone)</td>
-                <td>@Html.DisplayFor(modelItem => item.SexoFormatado)</td>
+                <td>@Html.DisplayFor(modelItem => aluno.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => aluno.CPF)</td>
+                <td>@Html.DisplayFor(modelItem => aluno.Id)</td>
+                <th>@Html.DisplayNameFor(model => model.Telefone)</th>
                 <td class="text-center">
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">
-                        <i class="bi bi-pencil-square"></i> Editar
-                    </a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">
+                    <!-- Botões de Ação -->
+                    <a href="@Url.Action("Details", "Alunos", new { id = aluno.Id })" class="btn btn-info btn-sm" title="Ver Detalhes">
                         <i class="bi bi-eye"></i> Detalhes
                     </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">
-                        <i class="bi bi-trash"></i> Deletar
+                    <a href="@Url.Action("Edit", "Alunos", new { id = aluno.Id })" class="btn btn-warning btn-sm" title="Editar">
+                        <i class="bi bi-pencil-square"></i> Editar
+                    </a>
+                    <a href="@Url.Action("Delete", "Alunos", new { id = aluno.Id })" class="btn btn-danger btn-sm" title="Excluir">
+                        <i class="bi bi-trash"></i> Excluir
                     </a>
                 </td>
             </tr>
@@ -85,6 +97,7 @@
 <!-- Script de Tooltips para Ícones -->
 @section Scripts {
     <script>
+        // Inicializa os tooltips dos ícones
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl);
