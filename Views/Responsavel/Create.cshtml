@@ -1,0 +1,102 @@
+﻿@model RotasParaOFuturo.Models.Responsavel
+
+@{
+    ViewData["Title"] = "Criar Responsável";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center my-4">Adicionar Responsável</h1>
+
+<div class="card mx-auto shadow-sm" style="max-width: 800px;">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0"><i class="fas fa-user-tie"></i> Cadastro de Responsável</h4>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+            <div class="mb-3">
+                <label asp-for="nome" class="form-label">
+                    <i class="fas fa-user"></i> Nome Completo
+                </label>
+                <input asp-for="nome" class="form-control" placeholder="Digite o nome do responsável" />
+                <span asp-validation-for="nome" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="aniversario" class="form-label">
+                    <i class="fas fa-calendar-alt"></i> Data de Aniversário
+                </label>
+                <input asp-for="aniversario" class="form-control" type="date" />
+                <span asp-validation-for="aniversario" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="cpf" class="form-label">
+                        <i class="fas fa-id-card"></i> CPF
+                    </label>
+                    <input asp-for="cpf" class="form-control" placeholder="Digite o CPF" />
+                    <span asp-validation-for="cpf" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="rg" class="form-label">
+                        <i class="fas fa-id-badge"></i> RG
+                    </label>
+                    <input asp-for="rg" class="form-control" placeholder="Digite o RG" />
+                    <span asp-validation-for="rg" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="tel" class="form-label">
+                    <i class="fas fa-phone-alt"></i> Telefone
+                </label>
+                <input asp-for="tel" class="form-control" placeholder="(XX) XXXXX-XXXX" />
+                <span asp-validation-for="tel" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="profissao" class="form-label">
+                    <i class="fas fa-briefcase"></i> Profissão
+                </label>
+                <input asp-for="profissao" class="form-control" placeholder="Digite a profissão" />
+                <span asp-validation-for="profissao" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="renda" class="form-label">
+                        <i class="fas fa-money-bill-alt"></i> Renda
+                    </label>
+                    <input asp-for="renda" class="form-control" placeholder="Digite a renda mensal" />
+                    <span asp-validation-for="renda" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="local" class="form-label">
+                        <i class="fas fa-map-marker-alt"></i> Local de Trabalho
+                    </label>
+                    <input asp-for="local" class="form-control" placeholder="Digite o local de trabalho" />
+                    <span asp-validation-for="local" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-save"></i> Salvar
+                </button>
+                <a asp-action="Index" class="btn btn-danger">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

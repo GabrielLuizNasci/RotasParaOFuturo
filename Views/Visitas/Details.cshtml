@@ -1,40 +1,61 @@
 ﻿@model RotasParaOFuturo.Models.Visita
+
 @{
     ViewData["Title"] = "Detalhes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container mt-4">
-    <h1 class="text-center mb-4">Detalhes da Visita</h1>
-    <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">Informações da Visita</h4>
-        </div>
-        <div class="card-body">
-            <div class="row mb-3 border-bottom pb-3">
-                <div class="col-sm-4 font-weight-bold">Responsável:</div>
-                <div class="col-sm-8">@Html.DisplayFor(model => model.responsavel.nome)</div>
-            </div>
-            <div class="row mb-3 border-bottom pb-3">
-                <div class="col-sm-4 font-weight-bold">Data da Visita:</div>
-                <div class="col-sm-8">@Html.DisplayFor(model => model.datavisita)</div>
-            </div>
-            <div class="row mb-3 border-bottom pb-3">
-                <div class="col-sm-4 font-weight-bold">Descrição:</div>
-                <div class="col-sm-8">@Html.DisplayFor(model => model.descricao)</div>
-            </div>
-            <div class="row mb-3 border-bottom pb-3">
-                <div class="col-sm-4 font-weight-bold">Status:</div>
-                <div class="col-sm-8">@Html.DisplayFor(model => model.StatusFormatado)</div>
+    <h1 class="text-center mb-4"><i class="bi bi-info-circle"></i> Detalhes da Visita</h1>
+    <div class="row g-4">
+        <!-- Responsável -->
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title text-primary"><i class="bi bi-person-circle"></i> Responsável</h5>
+                    <p class="card-text">@Html.DisplayFor(model => model.responsavel.nome)</p>
+                </div>
             </div>
         </div>
-        <div class="card-footer d-flex justify-content-end">
-            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-success mr-2">
-                <i class="fas fa-edit"></i> Editar
-            </a>
-            <a asp-action="Index" class="btn btn-danger">
-                <i class="fas fa-arrow-left"></i> Voltar
-            </a>
+
+        <!-- Data da Visita -->
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title text-primary"><i class="bi bi-calendar-event"></i> Data da Visita</h5>
+                    <p class="card-text">@Html.DisplayFor(model => model.datavisita)</p>
+                </div>
+            </div>
         </div>
+
+        <!-- Descrição -->
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title text-primary"><i class="bi bi-text-paragraph"></i> Descrição</h5>
+                    <p class="card-text">@Html.DisplayFor(model => model.descricao)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status -->
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title text-primary"><i class="bi bi-flag"></i> Status</h5>
+                    <p class="card-text">@Html.DisplayFor(model => model.StatusFormatado)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botões -->
+    <div class="mt-4 text-end">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-success me-2">
+            <i class="bi bi-pencil-square"></i> Editar
+        </a>
+        <a asp-action="Index" class="btn btn-danger">
+            <i class="bi bi-arrow-left"></i> Voltar à Lista
+        </a>
     </div>
 </div>

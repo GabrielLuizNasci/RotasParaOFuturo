@@ -6,38 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RotasParaOFuturo.Migrations.ContextoMigrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class CreateDatabaseSchema : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Admins",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Endereco = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Admins", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Alunos",
                 columns: table => new
@@ -45,11 +18,11 @@ namespace RotasParaOFuturo.Migrations.ContextoMigrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Nascimento = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    Nascimento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Endereco = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CPF = table.Column<int>(type: "int", nullable: false),
-                    RG = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Telefone = table.Column<int>(type: "int", nullable: false),
+                    CPF = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
+                    RG = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
+                    Telefone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     Sexo = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -63,25 +36,13 @@ namespace RotasParaOFuturo.Migrations.ContextoMigrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Descricao = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    Periodo = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Atividades", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Cursos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cursos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -190,7 +151,6 @@ namespace RotasParaOFuturo.Migrations.ContextoMigrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DataMatricula = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    cursoID = table.Column<int>(type: "int", nullable: false),
                     alunoID = table.Column<int>(type: "int", nullable: false),
                     RA = table.Column<int>(type: "int", nullable: false),
                     turmaID = table.Column<int>(type: "int", nullable: false)
@@ -205,12 +165,6 @@ namespace RotasParaOFuturo.Migrations.ContextoMigrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Matriculas_Cursos_cursoID",
-                        column: x => x.cursoID,
-                        principalTable: "Cursos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Matriculas_Turmas_turmaID",
                         column: x => x.turmaID,
                         principalTable: "Turmas",
@@ -222,11 +176,6 @@ namespace RotasParaOFuturo.Migrations.ContextoMigrations
                 name: "IX_Matriculas_alunoID",
                 table: "Matriculas",
                 column: "alunoID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Matriculas_cursoID",
-                table: "Matriculas",
-                column: "cursoID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Matriculas_turmaID",
@@ -253,9 +202,6 @@ namespace RotasParaOFuturo.Migrations.ContextoMigrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Admins");
-
-            migrationBuilder.DropTable(
                 name: "Matriculas");
 
             migrationBuilder.DropTable(
@@ -266,9 +212,6 @@ namespace RotasParaOFuturo.Migrations.ContextoMigrations
 
             migrationBuilder.DropTable(
                 name: "Alunos");
-
-            migrationBuilder.DropTable(
-                name: "Cursos");
 
             migrationBuilder.DropTable(
                 name: "Turmas");

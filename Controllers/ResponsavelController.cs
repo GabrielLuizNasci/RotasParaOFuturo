@@ -9,11 +9,11 @@ using RotasParaOFuturo.Models;
 
 namespace RotasParaOFuturo.Controllers
 {
-    public class ResponsaveisController : Controller
+    public class ResponsavelController : Controller
     {
         private readonly Contexto _context;
 
-        public ResponsaveisController(Contexto context)
+        public ResponsavelController(Contexto context)
         {
             _context = context;
         }

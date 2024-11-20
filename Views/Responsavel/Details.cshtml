@@ -1,47 +1,46 @@
-﻿@model RotasParaOFuturo.Models.Atividade
+﻿@model RotasParaOFuturo.Models.Responsavel
 
 @{
-    ViewData["Title"] = "Detalhes da Atividade";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Detalhes";
 }
 
-<h1 class="text-primary mb-4"><i class="bi bi-info-circle"></i> Detalhes da Atividade</h1>
-
+<h1>Details</h1>
 <div class="container">
     <div class="row g-4">
-
         <!-- Nome -->
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title text-primary"><i class="bi bi-pencil-fill"></i> Nome da Atividade</h5>
-                    <p class="card-text">@Html.DisplayFor(model => model.Nome)</p>
+                    <h5 class="card-title text-primary"><i class="bi bi-person-circle"></i> Nome</h5>
+                    <p class="card-text">@Html.DisplayFor(model => model.nome)</p>
                 </div>
             </div>
         </div>
 
-        <!-- Descrição -->
+        <!-- Aniversário -->
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title text-primary"><i class="bi bi-align-left"></i> Descrição</h5>
-                    <p class="card-text">@Html.DisplayFor(model => model.Descricao)</p>
+                    <h5 class="card-title text-primary"><i class="bi bi-calendar-date"></i> Aniversário</h5>
+                    <p class="card-text">@Html.DisplayFor(model => model.aniversario)</p>
                 </div>
             </div>
         </div>
 
-        <!-- Período -->
+        <!-- CPF -->
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title text-primary"><i class="bi bi-clock-fill"></i> Período</h5>
-                    <p class="card-text">@Html.DisplayFor(model => model.PeriodoFormatado)</p>
+                    <h5 class="card-title text-primary"><i class="bi bi-card-id-card"></i> CPF</h5>
+                    <p class="card-text">@Html.DisplayFor(model => model.cpf)</p>
                 </div>
             </div>
         </div>
 
+        <!-- Continue com os demais campos... -->
     </div>
 
+    <!-- Botões -->
     <div class="mt-4 text-end">
         <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-success me-2">
             <i class="bi bi-pencil-square"></i> Editar

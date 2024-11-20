@@ -1,0 +1,53 @@
+﻿@model RotasParaOFuturo.Models.Responsavel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<div class="container my-5">
+    <h1 class="text-center text-danger mb-4">Excluir Responsável</h1>
+
+    <h3 class="text-center mb-3">Tem certeza de que deseja excluir este responsável?</h3>
+
+    <div class="card shadow-lg">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">Detalhes</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Nome</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.nome)</dd>
+
+                <dt class="col-sm-3">Aniversário</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.aniversario)</dd>
+
+                <dt class="col-sm-3">CPF</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.cpf)</dd>
+
+                <dt class="col-sm-3">RG</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.rg)</dd>
+
+                <dt class="col-sm-3">Telefone</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.tel)</dd>
+
+                <dt class="col-sm-3">Profissão</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.profissao)</dd>
+
+                <dt class="col-sm-3">Renda</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.renda)</dd>
+
+                <dt class="col-sm-3">Local</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.local)</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <form asp-action="Delete" class="d-inline">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger btn-lg">Deletar</button>
+        </form>
+        <a asp-action="Index" class="btn btn-secondary btn-lg ml-3">Voltar</a>
+    </div>
+</div>

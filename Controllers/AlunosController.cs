@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RotasParaOFuturo.Models;
 
-namespace CurricularizacaoADS2024.Controllers
+namespace RotasParaOFuturo.Controllers
 {
     public class AlunosController : Controller
     {
@@ -17,7 +18,6 @@ namespace CurricularizacaoADS2024.Controllers
             _context = context;
         }
 
-        // GET: Alunos
         public async Task<IActionResult> Index(string nome, string cpf, int? id)
         {
             // Obtém todos os alunos
@@ -31,8 +31,9 @@ namespace CurricularizacaoADS2024.Controllers
 
             if (!string.IsNullOrEmpty(cpf))
             {
-                alunos = alunos.Where(a => a.CPF.ToString().Contains(cpf));
+                alunos = alunos.Where(a => a.CPF.Contains(cpf)); // Já funciona corretamente com CPF como string
             }
+
 
 
             if (id.HasValue)
@@ -69,6 +70,8 @@ namespace CurricularizacaoADS2024.Controllers
         }
 
         // POST: Alunos/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nome,Nascimento,Endereco,CPF,RG,Telefone,Sexo")] Aluno aluno)
@@ -99,6 +102,8 @@ namespace CurricularizacaoADS2024.Controllers
         }
 
         // POST: Alunos/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Nascimento,Endereco,CPF,RG,Telefone,Sexo")] Aluno aluno)

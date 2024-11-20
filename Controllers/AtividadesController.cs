@@ -53,7 +53,7 @@ namespace RotasParaOFuturo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome")] Atividade atividade)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Descricao,Periodo")] Atividade atividade)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace RotasParaOFuturo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] Atividade atividade)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Descricao,Periodo")] Atividade atividade)
         {
             if (id != atividade.Id)
             {

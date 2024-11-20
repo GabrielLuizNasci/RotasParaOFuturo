@@ -2,23 +2,24 @@
 
 @{
     ViewData["Title"] = "Adicionar Aluno";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1 class="text-center my-4">Adicionar Aluno</h1>
 
 <div class="card mx-auto shadow-sm" style="max-width: 600px;">
     <div class="card-header bg-primary text-white">
-        <h4 class="mb-0">Dados do Aluno</h4>
+        <h4 class="mb-0"><i class="fas fa-user-graduate"></i> Cadastro de Aluno</h4>
     </div>
     <div class="card-body">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
             <div class="mb-3">
                 <label asp-for="Nome" class="form-label">
-                    <i class="fas fa-user"></i> Nome
+                    <i class="fas fa-user"></i> Nome do Aluno
                 </label>
-                <input asp-for="Nome" class="form-control" />
+                <input asp-for="Nome" class="form-control" placeholder="Digite o nome do aluno" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
 
@@ -26,15 +27,15 @@
                 <label asp-for="Nascimento" class="form-label">
                     <i class="fas fa-calendar-alt"></i> Data de Nascimento
                 </label>
-                <input asp-for="Nascimento" class="form-control" type="date" />
+                <input asp-for="Nascimento" type="date" class="form-control" />
                 <span asp-validation-for="Nascimento" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label asp-for="Endereco" class="form-label">
-                    <i class="fas fa-map-marker-alt"></i> Endereço
+                    <i class="fas fa-home"></i> Endereço
                 </label>
-                <input asp-for="Endereco" class="form-control" />
+                <input asp-for="Endereco" class="form-control" placeholder="Digite o endereço do aluno" />
                 <span asp-validation-for="Endereco" class="text-danger"></span>
             </div>
 
@@ -42,15 +43,15 @@
                 <label asp-for="CPF" class="form-label">
                     <i class="fas fa-id-card"></i> CPF
                 </label>
-                <input asp-for="CPF" class="form-control" type="text" />
+                <input asp-for="CPF" class="form-control" placeholder="Digite o CPF do aluno" />
                 <span asp-validation-for="CPF" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label asp-for="RG" class="form-label">
-                    <i class="fas fa-id-card-alt"></i> RG
+                    <i class="fas fa-id-badge"></i> RG
                 </label>
-                <input asp-for="RG" class="form-control" />
+                <input asp-for="RG" class="form-control" placeholder="Digite o RG do aluno" />
                 <span asp-validation-for="RG" class="text-danger"></span>
             </div>
 
@@ -58,7 +59,7 @@
                 <label asp-for="Telefone" class="form-label">
                     <i class="fas fa-phone"></i> Telefone
                 </label>
-                <input asp-for="Telefone" class="form-control" type="text" />
+                <input asp-for="Telefone" class="form-control" placeholder="Digite o telefone do aluno" />
                 <span asp-validation-for="Telefone" class="text-danger"></span>
             </div>
 
@@ -68,9 +69,9 @@
                 </label>
                 @Html.DropDownList("Sexo", new SelectList(new List<SelectListItem>
                 {
-                new SelectListItem { Value = "1", Text = "Masculino" },
-                new SelectListItem { Value = "2", Text = "Feminino" },
-                new SelectListItem { Value = "3", Text = "Outro" }
+                    new SelectListItem { Value = "1", Text = "Masculino" },
+                    new SelectListItem { Value = "2", Text = "Feminino" },
+                    new SelectListItem { Value = "3", Text = "Outro" }
                 }, "Value", "Text"), "Selecione o Sexo", new { @class = "form-select" })
                 <span asp-validation-for="Sexo" class="text-danger"></span>
             </div>
@@ -92,3 +93,7 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+
+
+

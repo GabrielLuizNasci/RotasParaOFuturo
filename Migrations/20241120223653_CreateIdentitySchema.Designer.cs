@@ -12,8 +12,8 @@ using RotasParaOFuturo.Data;
 namespace RotasParaOFuturo.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20241119201242_Inicial")]
-    partial class Inicial
+    [Migration("20241120223653_CreateIdentitySchema")]
+    partial class CreateIdentitySchema
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,14 +1,12 @@
 ﻿@model RotasParaOFuturo.Models.Atividade
 
-
 @{
     ViewData["Title"] = "Adicionar Atividade";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1 class="text-center my-4">Adicionar Atividade</h1>
 
-<div class="card mx-auto shadow-sm" style="max-width: 500px;">
+<div class="card mx-auto shadow-sm" style="max-width: 600px;">
     <div class="card-header bg-primary text-white">
         <h4 class="mb-0"><i class="fas fa-tasks"></i> Cadastro de Atividade</h4>
     </div>
@@ -22,6 +20,27 @@
                 </label>
                 <input asp-for="Nome" class="form-control" placeholder="Digite o nome da atividade" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Descricao" class="form-label">
+                    <i class="fas fa-align-left"></i> Descrição
+                </label>
+                <input asp-for="Descricao" class="form-control" placeholder="Descreva a atividade" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Periodo" class="form-label">
+                    <i class="fas fa-venus-mars"></i> Período
+                </label>
+                @Html.DropDownList("Periodo", new SelectList(new List<SelectListItem>
+                {
+                    new SelectListItem { Value = "1", Text = "Manhã" },
+                    new SelectListItem { Value = "2", Text = "Tarde" },
+                    new SelectListItem { Value = "3", Text = "Noite" }
+                }, "Value", "Text"), "Selecione o Período", new { @class = "form-select" })
+                <span asp-validation-for="Periodo" class="text-danger"></span>
             </div>
 
             <div class="d-flex justify-content-between">

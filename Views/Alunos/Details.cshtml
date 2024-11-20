@@ -1,62 +1,78 @@
-﻿@model RotasParaOFuturo.Models.Aluno
+﻿
 
+@model RotasParaOFuturo.Models.Aluno
 
 @{
     ViewData["Title"] = "Detalhes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="text-primary mb-4"><i class="bi bi-person-circle"></i> Detalhes do Aluno</h1>
+<h1 class="text-primary mb-4"><i class="bi bi-person-lines-fill"></i> Detalhes do Aluno</h1>
 
 <div class="container">
     <div class="row g-4">
+
+        <!-- Nome -->
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title text-primary"><i class="bi bi-person-fill"></i> Nome</h5>
+                    <h5 class="card-title text-primary"><i class="bi bi-person-circle"></i> Nome</h5>
                     <p class="card-text">@Html.DisplayFor(model => model.Nome)</p>
                 </div>
             </div>
         </div>
+
+        <!-- Nascimento -->
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title text-primary"><i class="bi bi-calendar-event"></i> Nascimento</h5>
+                    <h5 class="card-title text-primary"><i class="bi bi-calendar-date"></i> Data de Nascimento</h5>
                     <p class="card-text">@Html.DisplayFor(model => model.Nascimento)</p>
                 </div>
             </div>
         </div>
+
+        <!-- Endereço -->
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title text-primary"><i class="bi bi-geo-alt-fill"></i> Endereço</h5>
+                    <h5 class="card-title text-primary"><i class="bi bi-house-door"></i> Endereço</h5>
                     <p class="card-text">@Html.DisplayFor(model => model.Endereco)</p>
                 </div>
             </div>
         </div>
+
+        <!-- CPF -->
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title text-primary"><i class="bi bi-credit-card"></i> CPF</h5>
+                    <h5 class="card-title text-primary"><i class="bi bi-card-id-card"></i> CPF</h5>
                     <p class="card-text">@Html.DisplayFor(model => model.CPF)</p>
                 </div>
             </div>
         </div>
+
+        <!-- RG -->
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title text-primary"><i class="bi bi-person-badge-fill"></i> RG</h5>
+                    <h5 class="card-title text-primary"><i class="bi bi-card-text"></i> RG</h5>
                     <p class="card-text">@Html.DisplayFor(model => model.RG)</p>
                 </div>
             </div>
         </div>
+
+        <!-- Telefone -->
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title text-primary"><i class="bi bi-telephone-fill"></i> Telefone</h5>
+                    <h5 class="card-title text-primary"><i class="bi bi-phone"></i> Telefone</h5>
                     <p class="card-text">@Html.DisplayFor(model => model.Telefone)</p>
                 </div>
             </div>
         </div>
+
+        <!-- Sexo -->
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-body">
@@ -72,7 +88,9 @@
             <i class="bi bi-pencil-square"></i> Editar
         </a>
         <a asp-action="Index" class="btn btn-danger">
-            <i class="bi bi-arrow-left"></i> Voltar
+            <i class="bi bi-arrow-left"></i> Voltar à Lista
         </a>
     </div>
 </div>
+
+

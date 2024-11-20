@@ -20,5 +20,25 @@ namespace RotasParaOFuturo.Models
         [StringLength(40)]
         [Display(Name = "Descricao: ")]
         public string Descricao { get; set; }
+
+
+        [Required]
+        [Display(Name = "Periodo: ")]
+        public int Periodo { get; set; }
+
+        [NotMapped]
+        public string PeriodoFormatado
+        {
+            get
+            {
+                return Periodo switch
+                {
+                    1 => "Manhã",
+                    2 => "Tarde",
+                    3 => "Noite",
+                    _ => "Não Especificado"
+                };
+            }
+        }
     }
 }

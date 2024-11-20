@@ -23,6 +23,23 @@
                     <span asp-validation-for="Nome" class="text-danger"></span>
                 </div>
 
+                <div class="form-group">
+                    <label asp-for="Descricao" class="control-label"><i class="fas fa-align-left"></i> Descrição</label>
+                    <input asp-for="Descricao" class="form-control" placeholder="Descreva a atividade" required />
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Periodo" class="form-label"><i class="fas fa-venus-mars"></i> Período</label>
+                    @Html.DropDownList("Periodo", new SelectList(new List<SelectListItem>
+                    {
+                        new SelectListItem { Value = "1", Text = "Manhã" },
+                        new SelectListItem { Value = "2", Text = "Tarde" },
+                        new SelectListItem { Value = "3", Text = "Noite" }
+                    }, "Value", "Text"), "Selecione o Período", new { @class = "form-select", required = "required" })
+                    <span asp-validation-for="Periodo" class="text-danger"></span>
+                </div>
+
                 <div class="form-group d-flex justify-content-between mt-4">
                     <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Salvar</button>
                     <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Voltar à Lista</a>
@@ -33,7 +50,7 @@
 </div>
 
 @section Scripts {
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
