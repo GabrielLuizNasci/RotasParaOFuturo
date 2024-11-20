@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using RotasParaOFuturo.Models;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using RotasParaOFuturo.Models;
 
-namespace RotasParaOFuturo.Controllers
+namespace CurricularizacaoADS2024.Controllers
 {
     public class AlunosController : Controller
     {
@@ -18,29 +20,27 @@ namespace RotasParaOFuturo.Controllers
         // GET: Alunos
         public async Task<IActionResult> Index(string nome, string cpf, int? id)
         {
-            // Inicia a consulta com todos os alunos
-            var alunos = from a in _context.Alunos
-                         select a;
+            // Obtém todos os alunos
+            var alunos = _context.Alunos.AsQueryable();
 
-            // Aplica filtro se o nome foi passado
+            // Aplica os filtros
             if (!string.IsNullOrEmpty(nome))
             {
-                alunos = alunos.Where(a => a.Nome.Contains(nome));  // Filtra por nome
+                alunos = alunos.Where(a => a.Nome.Contains(nome));
             }
 
-            // Aplica filtro se o CPF foi passado
             if (!string.IsNullOrEmpty(cpf))
             {
-                alunos = alunos.Where(a => a.CPF.ToString().Contains(cpf)); // Filtra por CPF
+                alunos = alunos.Where(a => a.CPF.ToString().Contains(cpf));
             }
 
-            // Aplica filtro se o ID foi passado
+
             if (id.HasValue)
             {
-                alunos = alunos.Where(a => a.Id == id);  // Filtra por ID
+                alunos = alunos.Where(a => a.Id == id);
             }
 
-            // Retorna a lista de alunos filtrados
+            // Retorna a lista filtrada para a view
             return View(await alunos.ToListAsync());
         }
 
@@ -65,13 +65,7 @@ namespace RotasParaOFuturo.Controllers
         // GET: Alunos/Create
         public IActionResult Create()
         {
-            // Garantindo que um novo aluno será criado com sexo predefinido
-            var aluno = new Aluno
-            {
-                Sexo = "Masculino"  // Definindo valor padrão para o sexo
-            };
-
-            return View(aluno);
+            return View();
         }
 
         // POST: Alunos/Create
@@ -81,12 +75,10 @@ namespace RotasParaOFuturo.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(aluno);  // Adiciona o aluno ao contexto
-                await _context.SaveChangesAsync();  // Salva no banco de dados
-                return RedirectToAction(nameof(Index));  // Redireciona para a lista de alunos
+                _context.Add(aluno);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-
-            // Se o modelo não for válido, retorna a view com o modelo atual para corrigir os erros
             return View(aluno);
         }
 
@@ -103,7 +95,6 @@ namespace RotasParaOFuturo.Controllers
             {
                 return NotFound();
             }
-
             return View(aluno);
         }
 
@@ -121,12 +112,12 @@ namespace RotasParaOFuturo.Controllers
             {
                 try
                 {
-                    _context.Update(aluno);  // Atualiza o aluno no contexto
-                    await _context.SaveChangesAsync();  // Salva as alterações no banco de dados
+                    _context.Update(aluno);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AlunoExists(aluno.Id))  // Verifica se o aluno existe
+                    if (!AlunoExists(aluno.Id))
                     {
                         return NotFound();
                     }
@@ -135,10 +126,9 @@ namespace RotasParaOFuturo.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));  // Redireciona para a lista de alunos
+                return RedirectToAction(nameof(Index));
             }
-
-            return View(aluno);  // Se não for válido, retorna à view de edição com os erros
+            return View(aluno);
         }
 
         // GET: Alunos/Delete/5
@@ -156,7 +146,7 @@ namespace RotasParaOFuturo.Controllers
                 return NotFound();
             }
 
-            return View(aluno);  // Exibe a view de confirmação para deletar
+            return View(aluno);
         }
 
         // POST: Alunos/Delete/5
@@ -167,16 +157,16 @@ namespace RotasParaOFuturo.Controllers
             var aluno = await _context.Alunos.FindAsync(id);
             if (aluno != null)
             {
-                _context.Alunos.Remove(aluno);  // Remove o aluno do contexto
+                _context.Alunos.Remove(aluno);
             }
 
-            await _context.SaveChangesAsync();  // Salva as alterações no banco de dados
-            return RedirectToAction(nameof(Index));  // Redireciona para a lista de alunos
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         private bool AlunoExists(int id)
         {
-            return _context.Alunos.Any(e => e.Id == id);  // Verifica se o aluno existe no banco
+            return _context.Alunos.Any(e => e.Id == id);
         }
     }
 }

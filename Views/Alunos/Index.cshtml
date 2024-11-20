@@ -62,10 +62,11 @@
 <table class="table custom-table table-striped table-hover table-bordered">
     <thead class="table-light">
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Nome)</th>
-            <th>@Html.DisplayNameFor(model => model.CPF)</th>
             <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.Nome)</th>
+            <th>Endereço</th>
             <th>@Html.DisplayNameFor(model => model.Telefone)</th>
+            <th>Sexo</th>
             <th class="text-center">Ações</th>
         </tr>
     </thead>
@@ -73,10 +74,11 @@
         @foreach (var aluno in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => aluno.Nome)</td>
-                <td>@Html.DisplayFor(modelItem => aluno.CPF)</td>
                 <td>@Html.DisplayFor(modelItem => aluno.Id)</td>
-                <th>@Html.DisplayNameFor(model => model.Telefone)</th>
+                <td>@Html.DisplayFor(modelItem => aluno.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => aluno.Endereco)</td>
+                <td>@Html.DisplayFor(modelItem => aluno.Telefone)</td>
+                <td>@Html.DisplayFor(modelItem => aluno.SexoFormatado)</td>
                 <td class="text-center">
                     <!-- Botões de Ação -->
                     <a href="@Url.Action("Details", "Alunos", new { id = aluno.Id })" class="btn btn-info btn-sm" title="Ver Detalhes">
@@ -93,6 +95,7 @@
         }
     </tbody>
 </table>
+
 
 <!-- Script de Tooltips para Ícones -->
 @section Scripts {
