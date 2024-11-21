@@ -20,5 +20,10 @@ namespace RotasParaOFuturo.Models
         [StringLength(40)]
         [Display(Name = "Descrição: ")]
         public string Descricao { get; set; }
+
+        [Required]
+        [Display(Name = "Data de cadastro: ")]
+        public DateTime DataMatricula { get; set; }
+
     }
 }

@@ -1,18 +1,18 @@
 ﻿@model RotasParaOFuturo.Models.Parceiro
 
 @{
-    ViewData["Title"] = "Excluir";
+    ViewData["Title"] = "Excluir Parceiro";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container my-5">
-    <h1 class="text-center text-danger mb-4">Excluir Parceiro</h1>
+    <h1 class="text-center text-danger mb-4"><i class="bi bi-trash3-fill"></i> Excluir Parceiro</h1>
 
     <h3 class="text-center mb-3">Tem certeza de que deseja excluir este parceiro?</h3>
 
     <div class="card shadow-lg">
         <div class="card-header bg-danger text-white">
-            <h4 class="mb-0">Detalhes do Parceiro</h4>
+            <h4 class="mb-0"><i class="bi bi-info-circle-fill"></i> Detalhes do Parceiro</h4>
         </div>
         <div class="card-body">
             <dl class="row">
@@ -21,6 +21,9 @@
 
                 <dt class="col-sm-3">Descrição</dt>
                 <dd class="col-sm-9">@Html.DisplayFor(model => model.Descricao)</dd>
+
+                <dt class="col-sm-3">Data de Matrícula</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.DataMatricula)</dd>
             </dl>
         </div>
     </div>
@@ -28,8 +31,16 @@
     <div class="text-center mt-4">
         <form asp-action="Delete" class="d-inline">
             <input type="hidden" asp-for="Id" />
-            <button type="submit" class="btn btn-danger btn-lg">Deletar</button>
+            <button type="submit" class="btn btn-danger btn-lg">
+                <i class="bi bi-trash3"></i> Confirmar Exclusão
+            </button>
         </form>
-        <a asp-action="Index" class="btn btn-secondary btn-lg ml-3">Voltar</a>
+        <a asp-action="Index" class="btn btn-secondary btn-lg ml-3">
+            <i class="bi bi-arrow-left"></i> Voltar à Lista
+        </a>
     </div>
 </div>
+
+@section Scripts {
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+}

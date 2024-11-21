@@ -12,7 +12,7 @@ using RotasParaOFuturo.Models;
 namespace RotasParaOFuturo.Migrations.ContextoMigrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20241120223715_CreateDatabaseSchema")]
+    [Migration("20241121023337_CreateDatabaseSchema")]
     partial class CreateDatabaseSchema
     {
         /// <inheritdoc />
@@ -131,6 +131,9 @@ namespace RotasParaOFuturo.Migrations.ContextoMigrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("DataMatricula")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(40)
@@ -243,10 +246,8 @@ namespace RotasParaOFuturo.Migrations.ContextoMigrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("periodo")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("periodo")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -292,7 +293,7 @@ namespace RotasParaOFuturo.Migrations.ContextoMigrations
                         .IsRequired();
 
                     b.HasOne("RotasParaOFuturo.Models.Turma", "turma")
-                        .WithMany()
+                        .WithMany("Matriculas")
                         .HasForeignKey("turmaID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -333,6 +334,11 @@ namespace RotasParaOFuturo.Migrations.ContextoMigrations
                         .IsRequired();
 
                     b.Navigation("responsavel");
+                });
+
+            modelBuilder.Entity("RotasParaOFuturo.Models.Turma", b =>
+                {
+                    b.Navigation("Matriculas");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RotasParaOFuturo.Models
@@ -13,19 +14,38 @@ namespace RotasParaOFuturo.Models
 
         [Required]
         [StringLength(50)]
-        [Display(Name ="Descrição: ")]
+        [Display(Name = "Descrição: ")]
         public string descricao { get; set; }
 
+    
+
+
         [Required]
-        [StringLength(50)]
         [Display(Name = "Periodo: ")]
-        public string periodo { get; set; }
+        public int periodo { get; set; }
+
+        [NotMapped]
+        public string periodoFormatado
+        {
+            get
+            {
+                return periodo switch
+                {
+                    1 => "Manhã",
+                    2 => "Tarde",
+                    3 => "Noite",
+                    _ => "Não Especificado"
+                };
+            }
+        }
 
         [Display(Name = "Atividade: ")]
         [StringLength(35)]
-        public Atividade atividade {get; set; }
-        [Display(Name = "Atividade: ")]
+        public Atividade atividade { get; set; }
+        [Display(Name = "Atividade ID: ")]
         public int atividadeID { get; set; }
 
+        // Propriedade para armazenar as matrículas associadas à turma
+        public ICollection<Matricula> Matriculas { get; set; }
     }
 }

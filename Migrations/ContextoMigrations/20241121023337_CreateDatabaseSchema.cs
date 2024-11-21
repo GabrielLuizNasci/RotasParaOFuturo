@@ -52,7 +52,8 @@ namespace RotasParaOFuturo.Migrations.ContextoMigrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
+                    Descricao = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    DataMatricula = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -86,7 +87,7 @@ namespace RotasParaOFuturo.Migrations.ContextoMigrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     descricao = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    periodo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    periodo = table.Column<int>(type: "int", nullable: false),
                     atividadeID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

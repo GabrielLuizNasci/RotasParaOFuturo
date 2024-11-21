@@ -24,7 +24,7 @@
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title text-primary"><i class="bi bi-clock"></i> Período</h5>
-                    <p class="card-text">@Html.DisplayFor(model => model.periodo)</p>
+                    <p class="card-text">@Html.DisplayFor(model => model.periodoFormatado)</p>
                 </div>
             </div>
         </div>
@@ -50,3 +50,7 @@
         </a>
     </div>
 </div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+}

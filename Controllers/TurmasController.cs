@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RotasParaOFuturo.Models;
 
-namespace CurricularizacaoADS2024.Controllers
+namespace RotasParaOFuturo.Controllers
 {
-    [Authorize(Roles = "Admin,Professor")]
     public class TurmasController : Controller
     {
         private readonly Contexto _context;
@@ -49,7 +47,7 @@ namespace CurricularizacaoADS2024.Controllers
         // GET: Turmas/Create
         public IActionResult Create()
         {
-            ViewData["atividadeID"] = new SelectList(_context.Set<Atividade>(), "Id", "Nome");
+            ViewData["atividadeID"] = new SelectList(_context.Atividades, "Id", "Descricao");
             return View();
         }
 
@@ -66,7 +64,7 @@ namespace CurricularizacaoADS2024.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["atividadeID"] = new SelectList(_context.Set<Atividade>(), "Id", "Nome", turma.atividadeID);
+            ViewData["atividadeID"] = new SelectList(_context.Atividades, "Id", "Descricao", turma.atividadeID);
             return View(turma);
         }
 
@@ -83,7 +81,7 @@ namespace CurricularizacaoADS2024.Controllers
             {
                 return NotFound();
             }
-            ViewData["atividadeID"] = new SelectList(_context.Set<Atividade>(), "Id", "Nome", turma.atividadeID);
+            ViewData["atividadeID"] = new SelectList(_context.Atividades, "Id", "Descricao", turma.atividadeID);
             return View(turma);
         }
 
@@ -119,7 +117,7 @@ namespace CurricularizacaoADS2024.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["atividadeID"] = new SelectList(_context.Set<Atividade>(), "Id", "Nome", turma.atividadeID);
+            ViewData["atividadeID"] = new SelectList(_context.Atividades, "Id", "Descricao", turma.atividadeID);
             return View(turma);
         }
 

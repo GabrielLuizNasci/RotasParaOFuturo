@@ -18,8 +18,8 @@ namespace RotasParaOFuturo.Models
 
         [Display(Name = "Aluno: ")]
         [StringLength(35)]
-        public Aluno aluno{ get; set; }
-        [Display(Name = "Aluno: ")]
+        public Aluno aluno { get; set; }
+        [Display(Name = "Aluno ID: ")]
         public int alunoID { get; set; }
 
         [Required]
@@ -29,7 +29,7 @@ namespace RotasParaOFuturo.Models
         [Display(Name = "Turma: ")]
         [StringLength(35)]
         public Turma turma { get; set; }
-        [Display(Name = "Turma: ")]
+        [Display(Name = "Turma ID: ")]
         public int turmaID { get; set; }
     }
 }

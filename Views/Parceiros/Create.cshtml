@@ -1,35 +1,48 @@
 ﻿@model RotasParaOFuturo.Models.Parceiro
+
 @{
     ViewData["Title"] = "Adicionar Parceiro";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="text-center my-4">Adicionar Parceiro</h1>
+<h1 class="text-center text-primary my-4"><i class="fas fa-handshake"></i> Adicionar Parceiro</h1>
 
-<div class="card mx-auto shadow-sm" style="max-width: 600px;">
+<div class="card mx-auto shadow-sm" style="max-width: 600px; border-radius: 10px;">
     <div class="card-header bg-primary text-white">
-        <h4 class="mb-0"><i class="fas fa-handshake"></i> Cadastro de Parceiro</h4>
+        <h4 class="mb-0"><i class="fas fa-plus-circle"></i> Cadastro de Parceiro</h4>
     </div>
     <div class="card-body">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
+            <!-- Nome -->
             <div class="mb-3">
-                <label asp-for="Nome" class="form-label">
+                <label asp-for="Nome" class="form-label fw-bold">
                     <i class="fas fa-user"></i> Nome do Parceiro
                 </label>
                 <input asp-for="Nome" class="form-control" placeholder="Digite o nome do parceiro" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
 
+            <!-- Descrição -->
             <div class="mb-3">
-                <label asp-for="Descricao" class="form-label">
+                <label asp-for="Descricao" class="form-label fw-bold">
                     <i class="fas fa-info-circle"></i> Descrição
                 </label>
                 <textarea asp-for="Descricao" class="form-control" rows="3" placeholder="Insira uma breve descrição"></textarea>
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
 
+            <!-- Data de Matrícula -->
+            <div class="mb-3">
+                <label asp-for="DataMatricula" class="form-label fw-bold">
+                    <i class="fas fa-calendar-alt"></i> Data de Matrícula
+                </label>
+                <input asp-for="DataMatricula" type="date" class="form-control" />
+                <span asp-validation-for="DataMatricula" class="text-danger"></span>
+            </div>
+
+            <!-- Botões -->
             <div class="d-flex justify-content-between">
                 <button type="submit" class="btn btn-success">
                     <i class="fas fa-save"></i> Salvar
@@ -43,7 +56,6 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMN8P4pHBz8TbARdI6IiE88BLb91xTJXWvknk+E" crossorigin="anonymous"></script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
 }
