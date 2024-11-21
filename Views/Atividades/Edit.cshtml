@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="Periodo" class="form-label"><i class="fas fa-venus-mars"></i> Período</label>
+                    <label asp-for="Periodo" class="form-label"><i class="bi bi-stopwatch"></i> Período</label>
                     @Html.DropDownList("Periodo", new SelectList(new List<SelectListItem>
                     {
                         new SelectListItem { Value = "1", Text = "Manhã" },
@@ -38,6 +38,12 @@
                         new SelectListItem { Value = "3", Text = "Noite" }
                     }, "Value", "Text"), "Selecione o Período", new { @class = "form-select", required = "required" })
                     <span asp-validation-for="Periodo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="TotalAulas" class="control-label"><i class="fas fa-align-left"></i> Total de Aulas</label>
+                    <input asp-for="TotalAulas" class="form-control" placeholder="Informe o Total de Aulas da Atividade" required />
+                    <span asp-validation-for="TotalAulas" class="text-danger"></span>
                 </div>
 
                 <div class="form-group d-flex justify-content-between mt-4">

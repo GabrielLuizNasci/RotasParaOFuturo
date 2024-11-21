@@ -82,6 +82,8 @@
             <th>@Html.DisplayNameFor(model => model.aluno)</th>
             <th>@Html.DisplayNameFor(model => model.RA)</th>
             <th>@Html.DisplayNameFor(model => model.turma)</th>
+            <th>@Html.DisplayNameFor(model => model.Presenca)</th>
+            <th>@Html.DisplayNameFor(model => model.Faltas)</th>
             <th class="text-center">Ações</th>
         </tr>
     </thead>
@@ -93,6 +95,8 @@
                 <td>@Html.DisplayFor(modelItem => item.aluno.Nome)</td>
                 <td>@Html.DisplayFor(modelItem => item.RA)</td>
                 <td>@Html.DisplayFor(modelItem => item.turma.descricao)</td>
+                <td>@Html.DisplayFor(modelItem => item.Presenca)</td>
+                <td>@Html.DisplayFor(modelItem => item.Faltas)</td>
                 <td class="text-center">
                     <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id">
                         <i class="bi bi-pencil-square"></i> Editar

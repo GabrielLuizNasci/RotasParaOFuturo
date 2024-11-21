@@ -40,5 +40,9 @@ namespace RotasParaOFuturo.Models
                 };
             }
         }
+
+        [Required]
+        [Display(Name = "Total de Aulas: ")]
+        public int TotalAulas { get; set; }
     }
 }

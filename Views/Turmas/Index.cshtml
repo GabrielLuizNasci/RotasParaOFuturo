@@ -61,6 +61,9 @@
                     <td>@Html.DisplayFor(modelItem => item.periodoFormatado)</td>
                     <td>@Html.DisplayFor(modelItem => item.atividade.Nome)</td>
                     <td class="text-center">
+                        <button class="btn btn-info btn-sm" data-bs-toggle="collapse" data-bs-target="#matriculas-@item.Id">
+                            <i class="bi bi-list"></i> Ver Matrículas
+                        </button>
                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
                             <i class="bi bi-pencil-square"></i> Editar
                         </a>
@@ -70,6 +73,13 @@
                         <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Excluir">
                             <i class="bi bi-trash"></i> Excluir
                         </a>
+                    </td>
+                </tr>
+                <tr id="matriculas-@item.Id" class="collapse">
+                    <td colspan="4">
+                        <div id="matriculas-list-@item.Id">
+                            @await Html.PartialAsync("_MatriculasList", item.Matriculas)
+                        </div>
                     </td>
                 </tr>
         }

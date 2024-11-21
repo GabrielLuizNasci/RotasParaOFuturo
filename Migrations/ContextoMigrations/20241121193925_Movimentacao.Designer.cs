@@ -9,11 +9,11 @@ using RotasParaOFuturo.Models;
 
 #nullable disable
 
-namespace RotasParaOFuturo.Migrations.ContextoMigrations
+namespace RotasParaOFuturo.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20241121151859_CreateDatabaseSchema")]
-    partial class CreateDatabaseSchema
+    [Migration("20241121193925_Movimentacao")]
+    partial class Movimentacao
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,6 +89,9 @@ namespace RotasParaOFuturo.Migrations.ContextoMigrations
                     b.Property<int>("Periodo")
                         .HasColumnType("int");
 
+                    b.Property<int>("TotalAulas")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Atividades");
@@ -104,6 +107,12 @@ namespace RotasParaOFuturo.Migrations.ContextoMigrations
 
                     b.Property<DateTime>("DataMatricula")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Faltas")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Presenca")
+                        .HasColumnType("int");
 
                     b.Property<int>("RA")
                         .HasColumnType("int");

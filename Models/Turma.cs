@@ -16,10 +16,7 @@ namespace RotasParaOFuturo.Models
         [StringLength(50)]
         [Display(Name = "Descrição: ")]
         public string descricao { get; set; }
-
     
-
-
         [Required]
         [Display(Name = "Periodo: ")]
         public int periodo { get; set; }
@@ -39,8 +36,8 @@ namespace RotasParaOFuturo.Models
             }
         }
 
+        [Required]
         [Display(Name = "Atividade: ")]
-        [StringLength(35)]
         public Atividade atividade { get; set; }
         [Display(Name = "Atividade ID: ")]
         public int atividadeID { get; set; }

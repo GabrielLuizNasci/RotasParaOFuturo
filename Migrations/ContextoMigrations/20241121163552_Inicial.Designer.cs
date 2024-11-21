@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RotasParaOFuturo.Models;
 
@@ -11,9 +12,11 @@ using RotasParaOFuturo.Models;
 namespace RotasParaOFuturo.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20241121163552_Inicial")]
+    partial class Inicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,9 +89,6 @@ namespace RotasParaOFuturo.Migrations
                     b.Property<int>("Periodo")
                         .HasColumnType("int");
 
-                    b.Property<int>("TotalAulas")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Atividades");
@@ -104,12 +104,6 @@ namespace RotasParaOFuturo.Migrations
 
                     b.Property<DateTime>("DataMatricula")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Faltas")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Presenca")
-                        .HasColumnType("int");
 
                     b.Property<int>("RA")
                         .HasColumnType("int");

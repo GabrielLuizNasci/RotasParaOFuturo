@@ -30,5 +30,13 @@ namespace RotasParaOFuturo.Models
         public Turma turma { get; set; }
         [Display(Name = "Turma ID: ")]
         public int turmaID { get; set; }
+
+        [Required]
+        [Display(Name = "Presença: ")]
+        public int Presenca { get; set; }
+
+        [Required]
+        [Display(Name = "Faltas: ")]
+        public int Faltas { get; set; }
     }
 }

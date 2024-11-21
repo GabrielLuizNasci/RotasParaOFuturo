@@ -1,0 +1,31 @@
+﻿@model IEnumerable<RotasParaOFuturo.Models.Matricula>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Aluno</th>
+            <th>Presença</th>
+            <th>Faltas</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var matricula in Model)
+        {
+            <tr>
+                <td>@matricula.aluno.Nome</td>
+                <td>@matricula.Presenca</td>
+                <td>@matricula.Faltas</td>
+                <td>
+                    <form asp-action="AddFaltas" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@matricula.Id" />
+                        <input type="number" name="faltas" min="0" class="form-control d-inline" style="width: 60px;" />
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="fas fa-plus"></i> Adicionar Faltas
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -79,7 +79,7 @@ namespace RotasParaOFuturo.Controllers
         // GET: Matriculas/Create
         public IActionResult Create()
         {
-            ViewData["alunoID"] = new SelectList(_context.Alunos, "Id", "CPF");
+            ViewData["alunoID"] = new SelectList(_context.Alunos, "Id", "Nome");
             ViewData["turmaID"] = new SelectList(_context.Turmas, "Id", "descricao");
             return View();
         }
@@ -93,13 +93,68 @@ namespace RotasParaOFuturo.Controllers
         {
             if (ModelState.IsValid)
             {
+                var turma = await _context.Turmas
+                    .Include(t => t.atividade)
+                    .FirstOrDefaultAsync(t => t.Id == matricula.turmaID);
+                if(turma != null && turma.atividade != null)
+                {
+                    matricula.Presenca = turma.atividade.TotalAulas;
+                    matricula.Faltas = 0;
+                }
+
                 _context.Add(matricula);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["alunoID"] = new SelectList(_context.Alunos, "Id", "CPF", matricula.alunoID);
+            ViewData["alunoID"] = new SelectList(_context.Alunos, "Id", "Nome", matricula.alunoID);
             ViewData["turmaID"] = new SelectList(_context.Turmas, "Id", "descricao", matricula.turmaID);
             return View(matricula);
+        }
+
+        // GET: Matriculas/AddFaltas/5
+        public async Task<IActionResult> AddFaltas(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var matricula = await _context.Matriculas
+                .Include(m => m.turma)
+                .ThenInclude(t => t.atividade)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (matricula == null)
+            {
+                return NotFound();
+            }
+
+            return View(matricula);
+        }
+
+        // POST: Matriculas/AddFaltas/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddFaltas(int id, int faltas)
+        {
+            var matricula = await _context.Matriculas.FindAsync(id);
+            if (matricula == null)
+            {
+                return NotFound();
+            }
+
+            if (faltas > 0)
+            {
+                matricula.Faltas += faltas;
+                matricula.Presenca -= faltas;
+                if (matricula.Presenca < 0)
+                {
+                    matricula.Presenca = 0; // Garantir que a presença não seja negativa
+                }
+
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Details), new { id = matricula.Id });
         }
 
         // GET: Matriculas/Edit/5
