@@ -14,8 +14,5 @@ namespace RotasParaOFuturo.Models
         public DbSet<Turma> Turmas { get; set; }
         public DbSet<Atividade> Atividades { get; set; }
         public DbSet<Professor> Professores { get; set; }
-
-        
-
     }
 }

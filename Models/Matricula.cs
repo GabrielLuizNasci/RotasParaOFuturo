@@ -11,7 +11,6 @@ namespace RotasParaOFuturo.Models
         [Display(Name = "ID: ")]
         public int Id { get; set; }
 
-
         [Required]
         [Display(Name = "Data de Matricula: ")]
         public DateTime DataMatricula { get; set; }

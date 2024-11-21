@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RotasParaOFuturo.Migrations.ContextoMigrations
 {
     /// <inheritdoc />
-    public partial class CreateDatabaseSchema : Migration
+    public partial class Inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,7 +21,7 @@ namespace RotasParaOFuturo.Migrations.ContextoMigrations
                     Nascimento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Endereco = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CPF = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
-                    RG = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
+                    RG = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
                     Telefone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     Sexo = table.Column<int>(type: "int", nullable: false)
                 },

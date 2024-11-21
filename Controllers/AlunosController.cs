@@ -18,7 +18,7 @@ namespace RotasParaOFuturo.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string nome, string cpf, int? id)
+        public async Task<IActionResult> Index(string nome, string cpf, int id)
         {
             // Obtém todos os alunos
             var alunos = _context.Alunos.AsQueryable();
@@ -34,12 +34,9 @@ namespace RotasParaOFuturo.Controllers
                 alunos = alunos.Where(a => a.CPF.Contains(cpf)); // Já funciona corretamente com CPF como string
             }
 
-
-
-            if (id.HasValue)
-            {
-                alunos = alunos.Where(a => a.Id == id);
-            }
+            
+            alunos = alunos.Where(a => a.Id == id);
+            
 
             // Retorna a lista filtrada para a view
             return View(await alunos.ToListAsync());

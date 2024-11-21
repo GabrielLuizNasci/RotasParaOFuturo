@@ -22,7 +22,7 @@ namespace RotasParaOFuturo.Models
         public string Descricao { get; set; }
 
         [Required]
-        [Display(Name = "Data de cadastro: ")]
+        [Display(Name = "Data de Cadastro: ")]
         public DateTime DataMatricula { get; set; }
 
     }

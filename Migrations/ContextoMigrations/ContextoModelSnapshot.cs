@@ -49,8 +49,8 @@ namespace RotasParaOFuturo.Migrations.ContextoMigrations
 
                     b.Property<string>("RG")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
 
                     b.Property<int>("Sexo")
                         .HasColumnType("int");

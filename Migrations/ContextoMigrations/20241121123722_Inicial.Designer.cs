@@ -12,8 +12,8 @@ using RotasParaOFuturo.Models;
 namespace RotasParaOFuturo.Migrations.ContextoMigrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20241121023337_CreateDatabaseSchema")]
-    partial class CreateDatabaseSchema
+    [Migration("20241121123722_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,8 +52,8 @@ namespace RotasParaOFuturo.Migrations.ContextoMigrations
 
                     b.Property<string>("RG")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
 
                     b.Property<int>("Sexo")
                         .HasColumnType("int");
