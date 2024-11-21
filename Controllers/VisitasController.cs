@@ -18,12 +18,82 @@ namespace CurricularizacaoADS2024.Controllers
             _context = context;
         }
 
-        // GET: Visitas
-        public async Task<IActionResult> Index()
+
+
+        public IActionResult GerarDadosVisitas()
         {
-            var contexto = _context.Visitas.Include(v => v.responsavel);
+            Random rand = new Random();
+
+            // Limpa os dados existentes
+            _context.Database.ExecuteSqlRaw("DELETE FROM Visitas");
+            _context.Database.ExecuteSqlRaw("DBCC CHECKIDENT('Visitas', RESEED, 0)");
+
+            // Obtém a lista de responsáveis cadastrados
+            var responsaveis = _context.Responsaveis.ToList();
+
+            // Verifica se existem responsáveis no banco de dados
+            if (!responsaveis.Any())
+            {
+                // Se não houver responsáveis, exibe uma mensagem ou lida como um erro
+                return Content("Não há responsáveis cadastrados para associar às visitas.");
+            }
+
+            // Gera 100 visitas
+            for (int i = 0; i < 100; i++)
+            {
+                Visita visita = new Visita
+                {
+                    // Seleciona um responsável aleatório da lista de responsáveis
+                    responsavelID = responsaveis[rand.Next(responsaveis.Count)].Id,
+
+                    // Gera uma data aleatória dentro de 50 anos a partir de 01/01/2020
+                    datavisita = Convert.ToDateTime("01/01/2020").AddDays(rand.Next(1, 18260)),
+
+                    descricao = "Descrição " + i,
+
+                    // Gera um status aleatório entre 1 e 2
+                    status = rand.Next(1, 3)
+                };
+
+                _context.Visitas.Add(visita);
+            }
+
+            // Salva as mudanças no banco de dados
+            _context.SaveChanges();
+
+            return View("Index", _context.Visitas.Include(v => v.responsavel).ToList());
+        }
+
+
+
+
+
+
+
+
+
+        // GET: Visitas
+        public async Task<IActionResult> Index(string nome, DateTime? dataVisita)
+        {
+            var contexto = _context.Visitas.Include(v => v.responsavel).AsQueryable();
+
+            // Filtro por nome do responsável
+            if (!string.IsNullOrEmpty(nome))
+            {
+                contexto = contexto.Where(v => v.responsavel.nome.Contains(nome));
+            }
+
+            // Filtro por data da visita
+            if (dataVisita.HasValue)
+            {
+                contexto = contexto.Where(v => v.datavisita.Date == dataVisita.Value.Date);
+            }
+
             return View(await contexto.ToListAsync());
         }
+
+
+
 
         // GET: Visitas/Details/5
         public async Task<IActionResult> Details(int? id)

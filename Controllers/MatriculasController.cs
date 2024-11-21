@@ -19,11 +19,42 @@ namespace RotasParaOFuturo.Controllers
         }
 
         // GET: Matriculas
-        public async Task<IActionResult> Index()
+
+
+
+
+        public async Task<IActionResult> Index(string nomeAluno, string ra)
         {
-            var contexto = _context.Matriculas.Include(m => m.aluno).Include(m => m.turma);
-            return View(await contexto.ToListAsync());
+            // Obtém todas as matrículas com os relacionamentos necessários
+            var matriculas = _context.Matriculas
+                .Include(m => m.aluno)
+                .Include(m => m.turma)
+                .AsQueryable();
+
+            // Filtra por nome do aluno
+            if (!string.IsNullOrEmpty(nomeAluno))
+            {
+                matriculas = matriculas.Where(m => m.aluno.Nome.Contains(nomeAluno));
+            }
+
+            // Filtra por RA (convertendo para string para comparação parcial)
+            if (!string.IsNullOrEmpty(ra))
+            {
+                matriculas = matriculas.Where(m => m.RA.ToString().Contains(ra));
+            }
+
+            // Retorna a lista filtrada para a view
+            return View(await matriculas.ToListAsync());
         }
+
+
+
+
+
+
+
+
+
 
         // GET: Matriculas/Details/5
         public async Task<IActionResult> Details(int? id)

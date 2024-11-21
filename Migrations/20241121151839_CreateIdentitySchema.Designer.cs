@@ -12,7 +12,7 @@ using RotasParaOFuturo.Data;
 namespace RotasParaOFuturo.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20241121023319_CreateIdentitySchema")]
+    [Migration("20241121151839_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {
         /// <inheritdoc />
